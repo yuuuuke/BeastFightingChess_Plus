@@ -12,8 +12,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModelProvider
+import com.zhpew.plus.Controller.state
 import com.zhpew.plus.view.BoardView
 import com.zhpew.plus.view.CellSize
+import com.zhpew.plus.view.CellView
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -37,26 +39,24 @@ class MainActivity : AppCompatActivity() {
 
                 Box(
                     modifier = Modifier
-                        .width(CellSize.dp*7)
-                        .height(CellSize.dp*9)
+                        .width(CellSize.dp * 7)
+                        .height(CellSize.dp * 9)
                 ) {
                     BoardView()
-//                    Row(modifier = Modifier.fillMaxSize()) {
-//                        for (i in 0 until 4) {
-//                            Column(
-//                                Modifier
-//                                    .fillMaxHeight()
-//                                    .width(60.dp)
-//                            ) {
-//                                for (j in 0 until 4) {
-//                                    CellView(
-//                                        cellBean = GameController.state.value.Pieces[i][j],
-//                                        i * 4 + j
-//                                    )
-//                                }
-//                            }
-//                        }
-//                    }
+                    // 横7竖9
+                    Row(modifier = Modifier.fillMaxSize()) {
+                        for (i in 0 until 7) {
+                            Column(
+                                Modifier
+                                    .fillMaxHeight()
+                                    .width(CellSize.dp)
+                            ) {
+                                for (j in 0 until 9) {
+                                    CellView(state.value.Pieces[j][i], j * 7 + i)
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
