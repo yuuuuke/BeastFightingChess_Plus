@@ -1,6 +1,7 @@
 package com.zhpew.plus
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.*
@@ -22,6 +23,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var vm: MainViewModel
 
+    var redPoint = 0
+    var bluePoint = 0
+
     private fun initVM() {
         vm = ViewModelProvider(this)[MainViewModel::class.java]
     }
@@ -29,6 +33,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initVM()
+
+        Controller.onFinished = {
+            if(it) redPoint++ else bluePoint ++
+            Toast.makeText(this, (if (it) "红方胜利！" else "蓝方胜利！") + "比分 红 $redPoint : 蓝 $bluePoint", Toast.LENGTH_LONG).show()
+            Controller.refresh()
+        }
 
         setContent {
             Column(
