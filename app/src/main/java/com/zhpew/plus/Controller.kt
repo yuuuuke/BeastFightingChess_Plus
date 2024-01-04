@@ -146,7 +146,7 @@ object Controller {
                         // 敌方棋子在我方陷阱中，可以吃掉，无视等级，直接吃掉
                         moveOrEat(lastIndex, index)
                     } else {
-                        if (lastCell.level >= targetCell.level || (lastCell.level == 1 && targetCell.level == 8)) {
+                        if ((lastCell.level >= targetCell.level && (lastCell.level!=8 && targetCell.level != 1)) || (lastCell.level == 1 && targetCell.level == 8)) {
                             // 可吃
                             moveOrEat(lastIndex, index)
                         }
